@@ -1,0 +1,33 @@
+[tool.poetry]
+name = "imagej-rolling-ball"
+version = "2023.8.0"
+description = "Python wrapper for ImageJ's rolling ball background subtraction using pyimagej"
+authors = ["Yu-An Chen <atwood12@gmail.com>"]
+readme = "README.md"
+packages = [{include = "imagej_rolling_ball"}]
+repository = "https://github.com/Yu-AnChen/imagej-rolling-ball"
+keywords = [
+    "microscopy",
+    "imagej",
+    "background subtraction",
+    "image processing"
+]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+pyimagej = "~1.4.1"
+dask = { version = ">=2021.10.0", optional = true }
+zarr = { version = ">=2.10, <2.15", optional = true }
+palom = { version = ">=2023.8.0", optional = true }
+fire = { version = ">=0.5.0", optional = true }
+
+[tool.poetry.extras]
+large = ["dask", "zarr"]
+wsi = ["palom", "fire"]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+rolling-ball = "imagej_rolling_ball.cli.rolling_ball:main"
