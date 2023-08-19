@@ -200,7 +200,7 @@ current directory:
 
 ```bash
  docker run -it --rm -v "$(pwd)":/data \
-    yu-anchen/imagej-rolling-ball \
+    yuanchen12/imagej-rolling-ball \
     rolling-ball /data/input.ome.tif 50
 ```
 
