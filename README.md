@@ -161,25 +161,25 @@ FLAGS
 
 **NOTES:**
 
-1. To pass in JVM options, e.g. set max heap size (`-Xmx4g`), use the syntax of
+- To pass in JVM options, e.g. set max heap size (`-Xmx4g`), use the syntax of
    `-j="-Xmx4g"`
-1. The defaut Java heap size is 70% of the available memory
-1. Increase `--num_workers` may speed up processing time, default is `4`
-1. The default output file will be next to the input file, the file name ends
-   with `-ij_rolling_ball_{radius}.ome.tif`
+- The defaut Java heap size is 70% of the available memory
+- Increase `--num_workers` may speed up processing time, default is `4`
+- The default output file will be generated next to the input file, the file
+  name ends with `-ij_rolling_ball_{radius}.ome.tif`
 
 **Example commands:**
 
-1. Minimal command, process file using rolling ball `100`, write
-   background-subtracted image to disk
+- Minimal command, process file using rolling ball radius of `100` and
+  writebackground-subtracted image to disk
 
     ```bash
     rolling-ball path/to/input/file.ome.tif 100
     ```
 
-1. Write background image instead of subtracted image (`--rolling_ball_kwargs
-   "{'create_background': True}"`) to file; set JVM max heap size to 4 GB
-   (`-j="-Xmx4g"`) and use 8 threads (`-n=8`)
+- Write background image instead of subtracted image (`--rolling_ball_kwargs
+  "{'create_background': True}"`) to file; set JVM max heap size to 4 GB
+  (`-j="-Xmx4g"`) and use 8 threads (`-n=8`)
 
     ```bash
     rolling-ball path/to/input/file.ome.tif 100 \
@@ -189,3 +189,20 @@ FLAGS
         --overwrite \
         -n=8
     ```
+
+### Docker usage
+
+The docker image can be build from the github repo or be pulled from the docker
+hub.
+
+To process an image file (`input.ome.tif`) with rolling ball radius `50` in the
+current directory:
+
+```bash
+ docker run -it --rm -v "$(pwd)":/data \
+    yu-anchen/imagej-rolling-ball \
+    rolling-ball /data/input.ome.tif 50
+```
+
+When the process is completed, output file `input-ij_rolling_ball_50.ome.tif`
+will be generated.
