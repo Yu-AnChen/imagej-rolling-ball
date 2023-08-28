@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "imagej-rolling-ball"
-version = "2023.8.1"
+version = "2023.8.2"
 description = "Python wrapper for ImageJ's rolling ball background subtraction using pyimagej"
 authors = ["Yu-An Chen <atwood12@gmail.com>"]
 readme = "README.md"

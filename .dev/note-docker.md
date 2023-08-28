@@ -17,7 +17,7 @@
     # `palom`, and `imagej-rolling-ball`
     micromamba activate pyimagej
     python -m pip install --dry-run imagej-rolling-ball[wsi]
-    # output: Would install imagej-rolling-ball-2023.8.1 opencv-python-4.8.0.76
+    # output: Would install imagej-rolling-ball-2023.8.2 opencv-python-4.8.0.76
     # palom-2023.8.1
 
     # if the above checks out, export micromamba env as yaml
@@ -25,7 +25,7 @@
 
     # pip install the rest packages, note: use `opencv-python-headless` instead
     # of `opencv-python`
-    python -m pip install --no-deps imagej-rolling-ball==2023.8.1 palom==2023.8.1 opencv-python-headless==4.8.0.76
+    python -m pip install --no-deps imagej-rolling-ball==2023.8.2 palom==2023.8.1 opencv-python-headless==4.8.0.76
 
     # Test the environment
     rolling-ball -h
@@ -47,7 +47,7 @@
         --no-deps \
         opencv-python-headless==4.8.0.76 \
         palom==2023.8.1 \
-        imagej-rolling-ball==2023.8.1
+        imagej-rolling-ball==2023.8.2
 
     RUN /opt/conda/bin/python -m pip cache purge
     ```
