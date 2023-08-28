@@ -28,6 +28,7 @@ def process_ometiff(
     target_chunk_size: int = 1024*5,
     overwrite: bool = False,
     java_options: str = None,
+    imagej_version: str = None,
     pyramid_config: dict = None,
     rolling_ball_kwargs: dict = None,
     num_workers: int = 4
@@ -54,7 +55,10 @@ def process_ometiff(
         logger.info(f"Java option: {java_options}")
 
     img = reader.pyramid[0]
-    bg_subtracter = BackgroundSubtracter(java_options=java_options)
+    bg_subtracter = BackgroundSubtracter(
+        java_options=java_options,
+        _imagej_version=imagej_version
+    )
 
     if rolling_ball_kwargs is None: rolling_ball_kwargs = {}
     out = []
