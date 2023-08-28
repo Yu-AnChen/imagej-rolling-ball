@@ -84,7 +84,7 @@ def process_ometiff(
                 ),
                 **dict(
                     downscale_factor=2,
-                    compression='lzw',
+                    compression='zlib',
                     tile_size=1024,
                     save_RAM=True
                 ),
