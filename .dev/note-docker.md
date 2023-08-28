@@ -1,16 +1,16 @@
-# Note for creating/building docker image for imagej-rolling-ball
+# Note for creating/building docker image for imagej-rolling-ball ([reference](https://micromamba-docker.readthedocs.io/en/latest/advanced_usage.html#advanced-usages))
 
 1. Create reference env on micromamba's docker image
 
     ```bash
     # Run bash in micromamba docker image with bind volume for writing out env
-    # yaml file
+    # lock file
     docker run -it --rm --platform linux/amd64 -v "$(pwd)":/data mambaorg/micromamba:1.4.9 bash
     ```
 
     ```bash
     # Manually install known deps in `pyimagej` env 
-    micromamba create -y -n pyimagej pyimagej openjdk=11 python=3.10 "scikit-image<0.20" scikit-learn "zarr<2.15" tifffile imagecodecs matplotlib tqdm scipy dask numpy loguru=0.5.3 "ome-types>0.3" pint napari-lazy-openslide yamale fire termcolor -c conda-forge
+    micromamba create -y -n pyimagej pyimagej openjdk=11 python=3.10 "scikit-image<0.20" scikit-learn "zarr<2.15" tifffile imagecodecs matplotlib tqdm scipy dask numpy loguru=0.5.3 "ome-types>0.3" "pydantic<2" pint napari-lazy-openslide yamale fire termcolor wget unzip -c conda-forge
 
 
     # Use `pip install --dry-run` to verify, only expecting to see `opencv`,
@@ -20,12 +20,15 @@
     # output: Would install imagej-rolling-ball-2023.8.4 opencv-python-4.8.0.76
     # palom-2023.8.1
 
+
     # if the above checks out, export micromamba env as yaml
-    micromamba env export --no-build > /data/env.yaml
+    micromamba env export --explicit > /data/docker-env.lock
+
 
     # pip install the rest packages, note: use `opencv-python-headless` instead
     # of `opencv-python`
     python -m pip install --no-deps imagej-rolling-ball==2023.8.4 palom==2023.8.1 opencv-python-headless==4.8.0.76
+
 
     # Test the environment
     rolling-ball -h
@@ -39,17 +42,17 @@
     ```Dcokerfile
     FROM mambaorg/micromamba:1.4.9
 
-    COPY --chown=$MAMBA_USER:$MAMBA_USER docker-env.yaml /tmp/docker-env.yaml
-    RUN micromamba install -y -n base -f /tmp/docker-env.yaml && \
-        micromamba clean --trash -aflp --yes
+    COPY --chown=$MAMBA_USER:$MAMBA_USER docker-env.lock /tmp/docker-env.lock
+    RUN micromamba install --name base --yes --file /tmp/docker-env.lock \
+        && micromamba clean --trash -aflp --yes
 
+    # pip install packages that are not available/problematic on conda-forge
     RUN /opt/conda/bin/python -m pip install \
         --no-deps \
         opencv-python-headless==4.8.0.76 \
         palom==2023.8.1 \
-        imagej-rolling-ball==2023.8.4
-
-    RUN /opt/conda/bin/python -m pip cache purge
+        imagej-rolling-ball==2023.8.4 \
+        && /opt/conda/bin/python -m pip cache purge
     ```
 
 1. When building the docker image, specify `--platform linux/amd64`
