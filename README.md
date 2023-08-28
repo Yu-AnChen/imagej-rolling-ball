@@ -148,6 +148,9 @@ FLAGS
     -j, --java_options=JAVA_OPTIONS
         Type: Optional[str]
         Default: None
+    -i, --imagej_version=IMAGEJ_VERSION
+        Type: Optional[str]
+        Default: None
     -p, --pyramid_config=PYRAMID_CONFIG
         Type: Optional[dict]
         Default: None
