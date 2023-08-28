@@ -17,7 +17,7 @@
     # `palom`, and `imagej-rolling-ball`
     micromamba activate pyimagej
     python -m pip install --dry-run imagej-rolling-ball[wsi]
-    # output: Would install imagej-rolling-ball-2023.8.4 opencv-python-4.8.0.76
+    # output: Would install imagej-rolling-ball-2023.8.5 opencv-python-4.8.0.76
     # palom-2023.8.1
 
 
@@ -27,7 +27,7 @@
 
     # pip install the rest packages, note: use `opencv-python-headless` instead
     # of `opencv-python`
-    python -m pip install --no-deps imagej-rolling-ball==2023.8.4 palom==2023.8.1 opencv-python-headless==4.8.0.76
+    python -m pip install --no-deps imagej-rolling-ball==2023.8.5 palom==2023.8.1 opencv-python-headless==4.8.0.76
 
 
     # Test the environment
@@ -51,7 +51,7 @@
         --no-deps \
         opencv-python-headless==4.8.0.76 \
         palom==2023.8.1 \
-        imagej-rolling-ball==2023.8.4 \
+        imagej-rolling-ball==2023.8.5 \
         && /opt/conda/bin/python -m pip cache purge
     ```
 
@@ -67,7 +67,7 @@
     docker run -it --rm --platform linux/amd64 test-ijrb \
         python -c "import numpy, tifffile, subprocess; \
         tifffile.imwrite('test.tif', numpy.eye(1500, dtype='uint8')); \
-        subprocess.run(['rolling-ball', 'test.tif', '20'])"
+        subprocess.run(['rolling-ball', 'test.tif', '20', '--imagej_version', '/tmp/Fiji.app'])"
     ```
 
     output
