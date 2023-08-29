@@ -9,7 +9,7 @@ RUN /opt/conda/bin/python -m pip install \
     --no-deps \
     opencv-python-headless==4.8.0.76 \
     palom==2023.8.1 \
-    imagej-rolling-ball==2023.8.5 \
+    imagej-rolling-ball==2023.8.6 \
     && /opt/conda/bin/python -m pip cache purge
 
 # down a local imagej (Fiji) for consistent initialization

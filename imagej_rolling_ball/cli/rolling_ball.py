@@ -33,13 +33,13 @@ def process_ometiff(
     rolling_ball_kwargs: dict = None,
     num_workers: int = 4
 ):
-    img_path = pathlib.Path(img_path).resolve()
+    img_path = pathlib.Path(img_path).absolute()
     reader = palom.reader.OmePyramidReader(img_path)
     stem = img_path.name.split('.')[0]
     out_path = ptools.validate_out_path(
         # FIXME out_path should be full path; this should be handled by
         # `validate_out_path`
-        out_path if out_path is None else pathlib.Path(out_path).resolve(),
+        out_path if out_path is None else pathlib.Path(out_path).absolute(),
         img_path.parent / f"{stem}-ij_rolling_ball_{radius}.ome.tif",
         overwrite=overwrite
     )
