@@ -13,9 +13,10 @@ RUN /opt/conda/bin/python -m pip install \
     && /opt/conda/bin/python -m pip cache purge
 
 # down a local imagej (Fiji) for consistent initialization
-RUN /opt/conda/bin/wget https://downloads.imagej.net/fiji/latest/fiji-nojre.zip &> /dev/null \
-    && /opt/conda/bin/unzip fiji-nojre.zip > /dev/null \
-    && rm fiji-nojre.zip
+RUN /opt/conda/bin/wget -P /home/mambauser/ \
+    https://downloads.imagej.net/fiji/latest/fiji-nojre.zip &> /dev/null \
+    && /opt/conda/bin/unzip /home/mambauser/fiji-nojre.zip -d /home/mambauser/ > /dev/null \
+    && rm /home/mambauser/fiji-nojre.zip
 
 # add conda path to PATH to allow entrypoint overwrite
 ENV PATH="${PATH}:/opt/conda/bin"
