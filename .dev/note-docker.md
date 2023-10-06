@@ -10,7 +10,7 @@
 
     ```bash
     # Manually install known deps in `pyimagej` env 
-    micromamba create -y -n pyimagej pyimagej openjdk=11 python=3.10 "scikit-image<0.20" scikit-learn "zarr<2.15" tifffile imagecodecs matplotlib tqdm scipy dask numpy loguru=0.5.3 "ome-types>0.3" "pydantic<2" pint napari-lazy-openslide yamale fire termcolor wget unzip -c conda-forge
+    micromamba create -y -n pyimagej pyimagej openjdk=11 python=3.10 "scikit-image<0.20" scikit-learn "zarr<2.15" tifffile imagecodecs matplotlib tqdm scipy dask numpy loguru=0.5.3 "ome-types>0.3" "pydantic<2" pint napari-lazy-openslide yamale fire termcolor wget unzip procps-ng -c conda-forge
 
 
     # Use `pip install --dry-run` to verify, only expecting to see `opencv`,
