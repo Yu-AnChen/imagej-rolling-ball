@@ -24,6 +24,7 @@ ROLLING_BALL_DEFAULT = {
 def process_ometiff(
     img_path,
     radius,
+    _channel: int = None,
     out_path: str = None,
     target_chunk_size: int = 1024 * 5,
     overwrite: bool = False,
@@ -57,6 +58,8 @@ def process_ometiff(
         logger.info(f"Java option: {java_options}")
 
     img = reader.pyramid[0]
+    if _channel is not None:
+        img = img[_channel : _channel + 1]
     bg_subtracter = BackgroundSubtracter(
         java_options=java_options, _imagej_version=imagej_version
     )
