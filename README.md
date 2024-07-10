@@ -136,6 +136,9 @@ POSITIONAL ARGUMENTS
     RADIUS
 
 FLAGS
+    --_channel=_CHANNEL
+        Type: Optional[int]
+        Default: None
     --out_path=OUT_PATH
         Type: Optional[str]
         Default: None
